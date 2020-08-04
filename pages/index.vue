@@ -1,22 +1,25 @@
 <template>
-  <section class="container">
+  <div class="container">
     <div>
-     {{ employees }}
+     <p>{{ $store.state.employees.employees}}</p>
+     <ul v-for="employee in employees">
+             <li>
+               {{employee}}
+             </li>
+      </ul>
+      <button v-on:click="$store.dispatch('employees/fetchEmployeesAction')">fetch</button>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
-const axios = require('axios')
-let url ='http://localhost:8080/employees'
 export default {
-  asyncData({params}){
-    return axios.get(url)
-      .then((res)=>{
-        return{ employees: res.data }
-      })
+  computed: {
+      employees() {
+        return this.$store.state.employees.employees;
+      }
+    }
+    }
 
-  }
-}
+
 </script>
-
