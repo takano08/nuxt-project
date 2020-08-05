@@ -6,20 +6,35 @@ export const state = () => ({
 export const mutations = {
   updateEmployees: function(state, payload) {
     state.employees = payload
-  }
-}
-export const actions = {
-   /* fetchEmployeesAction (context) {
-    const testPayload = {id:99,name:'testPayloadName',role:'testPayloadRole'}
-    context.commit('updateEmployees', testPayload)
+  },
+  deleteEmployees : function(state, employeeId) {
+
+    const replaceData = state.employees.filter(function(item, index){
+      if (item.id !== employeeId) return true;
+    });
+    state.employees = replaceData
   }
 
-   */
+}
+export const actions = {
 
   fetchEmployeesAction : async function (context) {
 
     axios.get('/api/employees').then((response) => {
       context.commit('updateEmployees', response.data)
+      return true;
+    }, (err) => {
+      console.log(err)
+      return false;
+    })
+  },
+  deleteEmployeesAction : async function (context,employeesId) {
+
+    console.log(employeesId);
+    const url = '/api/employees/' + employeesId
+    console.log(url);
+    axios.delete(url).then((response) => {
+      context.commit('deleteEmployees', employeesId)
       return true;
     }, (err) => {
       console.log(err)
