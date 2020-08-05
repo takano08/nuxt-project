@@ -28,7 +28,7 @@ export const actions = {
       return false;
     })
   },
-  deleteEmployeesAction : async function (context,employeesId) {
+  /* deleteEmployeesAction : async function (context,employeesId) {
 
     console.log(employeesId);
     const url = '/api/employees/' + employeesId
@@ -40,6 +40,34 @@ export const actions = {
       console.log(err)
       return false;
     })
-  }
+  },*/
+
+  deleteEmployeesAction : async function ({commit,dispatch},employeesId) {
+
+    console.log(employeesId);
+    const url = '/api/employees/' + employeesId
+    console.log(url);
+    axios.delete(url).then((response) => {
+      dispatch('fetchEmployeesAction')
+      return true;
+    }, (err) => {
+      console.log(err)
+      return false;
+    })
+  },
+
+  createEmployeesAction : async function ({commit,dispatch},createEmployee) {
+
+    console.log(createEmployee);
+    const url = '/api/employees/'
+    console.log(url);
+    axios.delete(url,createEmployee).then((response) => {
+      dispatch('fetchEmployeesAction')
+      return true;
+    }, (err) => {
+      console.log(err)
+      return false;
+    })
+  },
 
 }
