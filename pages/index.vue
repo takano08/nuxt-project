@@ -7,6 +7,7 @@
       <input type="text" v-model="createEmployee.name">
      <label>role</label>
       <input type="text" v-model="createEmployee.role">
+      <button v-on:click="$store.dispatch('employees/createEmployeesAction',createEmployee)">create</button>
           <ul v-for="employee in employees">
              <li>
                <input type="text" v-model="employee.name">

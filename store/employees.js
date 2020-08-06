@@ -21,7 +21,8 @@ export const actions = {
 
   fetchEmployeesAction : async function (context) {
 
-    axios.get('/api/employees').then((response) => {
+   axios.get('/api/employees').then((response) => {
+     //axios.get('http://localhost:8080/employees').then((response) => {
       context.commit('updateEmployees', response.data)
       return true;
     }, (err) => {

@@ -1,1 +1,1 @@
-export const strict = false
+export const strict =false
